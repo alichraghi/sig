@@ -161,7 +161,7 @@ test "stable_log" {
             .log_collector = LogCollector.default(),
         },
     );
-    defer sig.runtime.testing.deinitTransactionContext(allocator, tc);
+    defer sig.runtime.testing.deinitTransactionContext(allocator, &tc);
 
     const program_id =
         Pubkey.parseBase58String("SigDefau1tPubkey111111111111111111111111111") catch unreachable;

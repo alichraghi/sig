@@ -76,18 +76,18 @@ pub fn expectProgramExecuteResult(
                 std.debug.print("    {}: {s}\n", .{ index, log });
             }
         }
-        deinitTransactionContext(allocator, initial_tc);
+        deinitTransactionContext(allocator, &initial_tc);
     }
 
     // Create the expected transaction context
     var expected_prng = std.Random.DefaultPrng.init(0);
 
-    const expected_tc = try createTransactionContext(
+    var expected_tc = try createTransactionContext(
         allocator,
         expected_prng.random(),
         expected_context_params,
     );
-    defer deinitTransactionContext(allocator, expected_tc);
+    defer deinitTransactionContext(allocator, &expected_tc);
 
     // Create the instruction info
     var instruction_info = try createInstructionInfo(

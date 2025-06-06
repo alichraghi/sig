@@ -175,7 +175,7 @@ test getSysvar {
             .last_restart_slot = src.restart,
         },
     });
-    defer testing.deinitTransactionContext(allocator, tc);
+    defer testing.deinitTransactionContext(allocator, &tc);
 
     // // Test clock sysvar
     {
@@ -506,7 +506,7 @@ fn testGetStakeHistory(filled: bool) !void {
         .compute_meter = std.math.maxInt(u64),
         .sysvar_cache = .{ .stake_history = src_history },
     });
-    defer testing.deinitTransactionContext(allocator, tc);
+    defer testing.deinitTransactionContext(allocator, &tc);
 
     var buffer = std.mem.zeroes([sysvar.StakeHistory.SIZE_OF]u8);
     const buffer_addr = 0x100000000;
@@ -579,7 +579,7 @@ fn testGetSlotHashes(filled: bool) !void {
         .compute_meter = std.math.maxInt(u64),
         .sysvar_cache = .{ .slot_hashes = src_hashes },
     });
-    defer testing.deinitTransactionContext(allocator, tc);
+    defer testing.deinitTransactionContext(allocator, &tc);
 
     var buffer = std.mem.zeroes([sysvar.SlotHashes.SIZE_OF]u8);
     const buffer_addr = 0x100000000;
